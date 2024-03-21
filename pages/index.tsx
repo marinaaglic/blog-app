@@ -4,6 +4,7 @@ import { getSortedPostsData } from "@/lib/posts";
 import { PostData } from "@/lib/posts";
 import Layout from "@/components/layout";
 import utilClasses from "../styles/utils.module.css";
+import Date from "@/components/date";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -31,11 +32,11 @@ export default function Home({ allPostsData }: PostData) {
         <ul className={utilClasses.list}>
           {allPostsData.map(({ id, date, title }: PostData) => (
             <li className={utilClasses.listItem} key={id}>
-              {title}
+              <Link href={`/posts/${id}`}>{title}</Link>
               <br />
-              {id}
-              <br />
-              {date}
+              <small className={utilClasses.lightText}>
+                <Date dateString={date} />
+              </small>
             </li>
           ))}
         </ul>
